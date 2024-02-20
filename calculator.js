@@ -1,17 +1,21 @@
 function add(num1, num2) {
-    return Math.round(((num1 + num2) + Number.EPSILON) * 10000000) / 10000000;
+    return roundSevenDP((num1 + num2));
 }
 
 function subtract(num1, num2) {
-    return Math.round(((num1 - num2) + Number.EPSILON) * 10000000) / 10000000;
+    return roundSevenDP((num1 - num2));
 }
 
 function multiply(num1, num2) {
-    return Math.round(((num1 * num2) + Number.EPSILON) * 10000000) / 10000000;
+    return roundSevenDP((num1 * num2));
 }
 
 function divide(num1, num2) {
-    return num2 === 0 ? "Nope" : Math.round(((num1 / num2) + Number.EPSILON) * 10000000) / 10000000;
+    return num2 === 0 ? "Nope" : roundSevenDP((num1 / num2));
+}
+
+function roundSevenDP(number) {
+    return Math.round((number + Number.EPSILON) * 10000000) / 10000000;
 }
 
 function operate(num1, num2, operator) {
