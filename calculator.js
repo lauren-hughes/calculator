@@ -27,17 +27,25 @@ function operate(num1, num2, operator) {
     }
 }
 
-let num1 = null;
-let num2 = null;
-let operator = null;
+function changeDisplay(number) {
+    let display = document.querySelector(".display");
+    display.textContent = number;
+}
+
+let num1 = "";
+let num2 = "";
+let operator = "";
 
 const numberButtons = document.querySelectorAll(".numbers button");
 numberButtons.forEach(button => button.addEventListener("click", (event) => {
-    if (num1 === null) {
-        num1 = Number(event.target.textContent);
+    // If no operator has been selected, then all number inputs must be related to num1
+    if (operator === "") {
+        num1 += event.target.textContent;
+        changeDisplay(num1);
     }
     else {
-        num2 = Number(event.target.textContent);
+        num2 += event.target.textContent;
+        changeDisplay(num2);
     }
 }));
 
@@ -47,7 +55,8 @@ operatorButtons.forEach(button => button.addEventListener("click", (event) => {
         case "AC":
             break;
         case "=":
-            console.log(operate(num1, num2, operator));
+            let result = operate(Number(num1), Number(num2), operator);
+            changeDisplay(result);
             break;
         default:
             operator = event.target.textContent;
