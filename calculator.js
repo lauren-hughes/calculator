@@ -53,6 +53,10 @@ const operatorButtons = document.querySelectorAll(".operators button");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
     switch (event.target.textContent) {
         case "AC":
+            num1 = "";
+            num2 = "";
+            operator = "";
+            changeDisplay(0);
             break;
         case "=":
             let result = operate(Number(num1), Number(num2), operator);
