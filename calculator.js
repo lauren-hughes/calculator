@@ -50,10 +50,21 @@ numberButtons.forEach(button => button.addEventListener("click", (event) => {
     if (operator === "") {
         // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
         // If that is the case, we don't want to concatenate that number, we want to replace it completely
-        num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
+        if (typeof num1 === "number") {
+            num1 = event.target.textContent;
+        } 
+        // If the first number is not being replaced, it already contains a decimal point, and a decimal point has been selected, do nothing
+        else if (event.target.textContent === "." && num1.includes(".")) {
+            return;
+        } 
+        else {
+            num1 += event.target.textContent;
+        }
         changeDisplay(num1);
-    }
+    } 
     else {
+        // If the second number already contains a decimal point and a decimal point has been selected, do nothing
+        if (event.target.textContent === "." && num2.includes(".")) return;
         num2 += event.target.textContent;
         changeDisplay(num2);
     }
