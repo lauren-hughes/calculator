@@ -65,7 +65,8 @@ operatorButtons.forEach(button => button.addEventListener("click", (event) => {
             changeDisplay(0);
             break;
         case "=":
-            operationHandler(Number(num1), Number(num2), operator);
+            // Only carry out the operation if all required values have been entered
+            if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
             break;
         default:
             // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
