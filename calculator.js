@@ -46,7 +46,7 @@ let operator = "";
 
 const numberButtons = document.querySelectorAll(".numbers button");
 numberButtons.forEach(button => button.addEventListener("click", (event) => {
-    // If no operator has been selected, then all number inputs must be related to num1
+    // If no operator has been selected, then all number inputs must be related to the first number
     if (operator === "") {
         num1 += event.target.textContent;
         changeDisplay(num1);
@@ -69,11 +69,12 @@ operatorButtons.forEach(button => button.addEventListener("click", (event) => {
             if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
             break;
         default:
-            // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
-            // This does not preserve order of operations, as expected in the specification
-            if (num2 !== "") {
-                operationHandler(Number(num1), Number(num2), operator);
+            // Don't acknowledge any +, -, × or ÷ clicks unless at least one number has been entered
+            if (num1 !== "") {
+                // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
+                // This does not preserve order of operations aligning with the specification
+                if (num2 !== "") operationHandler(Number(num1), Number(num2), operator);
+                operator = event.target.textContent;
             }
-            operator = event.target.textContent;
     }
 }));
