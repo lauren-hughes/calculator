@@ -32,12 +32,12 @@ function changeDisplay(number) {
     display.textContent = number;
 }
 
-function operationHandler(x, y, operator) {
-    let result = operate(x, y, operator);
-    changeDisplay(result);
+function operationHandler(x, y, currentOperator) {
     // Referring to the global variables
-    num1 = result;
+    num1 = operate(x, y, currentOperator);
     num2 = operator = "";
+    
+    changeDisplay(num1);
 }
 
 let num1 = "";
@@ -48,7 +48,9 @@ const numberButtons = document.querySelectorAll(".numbers button");
 numberButtons.forEach(button => button.addEventListener("click", (event) => {
     // If no operator has been selected, then all number inputs must be related to the first number
     if (operator === "") {
-        num1 += event.target.textContent;
+        // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
+        // If that is the case, we don't want to concatenate that number, we want to replace it completely
+        num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
         changeDisplay(num1);
     }
     else {
