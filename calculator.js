@@ -32,6 +32,14 @@ function changeDisplay(number) {
     display.textContent = number;
 }
 
+function operationHandler(x, y, operator) {
+    let result = operate(x, y, operator);
+    changeDisplay(result);
+    // Referring to the global variables
+    num1 = result;
+    num2 = operator = "";
+}
+
 let num1 = "";
 let num2 = "";
 let operator = "";
@@ -53,16 +61,18 @@ const operatorButtons = document.querySelectorAll(".operators button");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
     switch (event.target.textContent) {
         case "AC":
-            num1 = "";
-            num2 = "";
-            operator = "";
+            num1 = num2 = operator = "";
             changeDisplay(0);
             break;
         case "=":
-            let result = operate(Number(num1), Number(num2), operator);
-            changeDisplay(result);
+            operationHandler(Number(num1), Number(num2), operator);
             break;
         default:
+            // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
+            // This does not preserve order of operations, as expected in the specification
+            if (num2 !== "") {
+                operationHandler(Number(num1), Number(num2), operator);
+            }
             operator = event.target.textContent;
     }
 }));
