@@ -1,17 +1,17 @@
 function add(num1, num2) {
-    return num1 + num2;
+    return Math.round(((num1 + num2) + Number.EPSILON) * 10000000) / 10000000;
 }
 
 function subtract(num1, num2) {
-    return num1 - num2;
+    return Math.round(((num1 - num2) + Number.EPSILON) * 10000000) / 10000000;
 }
 
 function multiply(num1, num2) {
-    return num1 * num2;
+    return Math.round(((num1 * num2) + Number.EPSILON) * 10000000) / 10000000;
 }
 
 function divide(num1, num2) {
-    return num1 / num2;
+    return Math.round(((num1 / num2) + Number.EPSILON) * 10000000) / 10000000;
 }
 
 function operate(num1, num2, operator) {
