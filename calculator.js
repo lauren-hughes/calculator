@@ -27,6 +27,29 @@ function operate(num1, num2, operator) {
     }
 }
 
-let num1;
-let num2;
-let operator;
+let num1 = null;
+let num2 = null;
+let operator = null;
+
+const numberButtons = document.querySelectorAll(".numbers button");
+numberButtons.forEach(button => button.addEventListener("click", (event) => {
+    if (num1 === null) {
+        num1 = Number(event.target.textContent);
+    }
+    else {
+        num2 = Number(event.target.textContent);
+    }
+}));
+
+const operatorButtons = document.querySelectorAll(".operators button");
+operatorButtons.forEach(button => button.addEventListener("click", (event) => {
+    switch (event.target.textContent) {
+        case "AC":
+            break;
+        case "=":
+            console.log(operate(num1, num2, operator));
+            break;
+        default:
+            operator = event.target.textContent;
+    }
+}));
