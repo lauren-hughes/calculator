@@ -54,6 +54,7 @@ numberButtons.forEach(button => button.addEventListener("click", (event) => {
     // If no operator has been selected, then all number inputs must be related to the first number
     if (operator === "") {
         // Checking the length prevents the number from overfilling the display div
+        // Eight leaves enough room for a decimal point and negation if they choose
         if (num1.length < 8) {
             // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
             // If that is the case, we don't want to concatenate that number, we want to replace it completely
@@ -100,11 +101,15 @@ decimalButton.addEventListener("click", (event) => {
 
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
-    // Don't acknowledge any +, −, × or ÷ clicks unless at least one number has been entered
     if (num1 !== "") {
         // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
         // This does not preserve order of operations aligning with the specification
         if (num2 !== "") operationHandler(Number(num1), Number(num2), operator);
+        operator = event.target.textContent;
+    }
+    // If a first number hasn't been entered, then the user must want to use the displayed number of "0"
+    else {
+        num1 = "0";
         operator = event.target.textContent;
     }
 }));
