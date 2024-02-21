@@ -21,6 +21,15 @@ p {
     padding: 0;
 }
 
+/* This selector was made more specific to prevent the .operator selector from overriding it */
+.row .active-operator {
+    background-color: #ffb499;
+}
+
+.clear, .delete, .equals, .negative, .operator {
+    background-color: #ff8f66;
+}
+
 .brand {
     color: white;
     font-family: "EB Garamond" serif;
@@ -50,15 +59,11 @@ p {
     background-color: #B1D0B1;
     border: 2px solid black;
     border-radius: 5px;
-    text-align: right;
     font-family: "Orbitron", sans-serif;
     font-size: 60px;
     margin: 30px 0px 30px 0px;
     padding: 10px;
-}
-
-.clear, .delete, .equals, .negative, .operator {
-    background-color: #ff8f66;
+    text-align: right;
 }
 
 .model {

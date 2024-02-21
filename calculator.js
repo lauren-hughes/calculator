@@ -99,8 +99,18 @@ decimalButton.addEventListener("click", (event) => {
         }
 });
 
+const buttons = document.querySelectorAll("button");
+// If any button is selected, the previous selected operator is no longer active
+buttons.forEach(button => button.addEventListener("click", (event) => {
+    // If the clicked button is the = or +/- button, then the active operator is still active
+    if (event.target.textContent !== "=" && event.target.textContent !== "+/−") operatorButtons.forEach(button => button.classList.remove("active-operator"));
+}));
+
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
+    // If an operator button is pressed, highlight it as active
+    event.target.classList.add("active-operator");
+
     if (num1 !== "") {
         // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
         // This does not preserve order of operations aligning with the specification
