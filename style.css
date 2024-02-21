@@ -1,0 +1,61 @@
+/* Orbitron and Roboto Mono fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+body {
+    margin: 0;
+}
+
+button {
+    background-color: #bfbfbf;
+    border-radius: 5px;
+    color: white;
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 40px;
+    margin: 3px;
+    padding: 5px;
+    width: 80px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.calculator {
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.display {
+    background-color: #B1D0B1;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: right;
+    font-family: "Orbitron", sans-serif;
+    font-size: 60px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.operators button {
+    background-color: #ff8f66;
+}
+
+.row {
+    display: flex;
+}
+
+/* Makes the zero button occupy two button widths */
+.zero {
+    flex: 1;
+}
+
+#container {
+    align-items: center;
+    background-color: ivory;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}

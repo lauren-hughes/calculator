@@ -22,7 +22,7 @@ function operate(num1, num2, operator) {
     switch (operator) {
         case "+":
             return add(num1, num2);
-        case "-":
+        case "−":
             return subtract(num1, num2);
         case "×":
             return multiply(num1, num2);
@@ -48,7 +48,7 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 
-const numberButtons = document.querySelectorAll(".numbers button");
+const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => button.addEventListener("click", (event) => {
     // If no operator has been selected, then all number inputs must be related to the first number
     if (operator === "") {
@@ -106,7 +106,7 @@ operatorButtons.forEach(button => button.addEventListener("click", (event) => {
             if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
             break;
         default:
-            // Don't acknowledge any +, -, × or ÷ clicks unless at least one number has been entered
+            // Don't acknowledge any +, −, × or ÷ clicks unless at least one number has been entered
             if (num1 !== "") {
                 // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
                 // This does not preserve order of operations aligning with the specification
