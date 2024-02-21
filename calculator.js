@@ -1,21 +1,22 @@
 function add(num1, num2) {
-    return roundSevenDP((num1 + num2));
+    let result = num1 + num2;
+    // If result is too large for the display, return it in exponential form
+    return (result.toString().length > 9) ? result.toExponential(3) : result;
 }
 
 function subtract(num1, num2) {
-    return roundSevenDP((num1 - num2));
+    let result = num1 - num2;
+    return (result.toString().length > 9) ? result.toExponential(3) : result;
 }
 
 function multiply(num1, num2) {
-    return roundSevenDP((num1 * num2));
+    let result = num1 * num2;
+    return (result.toString().length > 9) ? result.toExponential(3) : result;
 }
 
 function divide(num1, num2) {
-    return num2 === 0 ? "Nope" : roundSevenDP((num1 / num2));
-}
-
-function roundSevenDP(number) {
-    return Math.round((number + Number.EPSILON) * 10000000) / 10000000;
+    let result = (num2 === 0) ? "Nope" : num1 / num2;
+    return (result.toString().length > 9) ? result.toExponential(3) : result;
 }
 
 function operate(num1, num2, operator) {
@@ -52,12 +53,15 @@ const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => button.addEventListener("click", (event) => {
     // If no operator has been selected, then all number inputs must be related to the first number
     if (operator === "") {
-        // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
-        // If that is the case, we don't want to concatenate that number, we want to replace it completely
-        num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
-        changeDisplay(num1);
+        // Checking the length prevents the number from overfilling the display div
+        if (num1.length < 8) {
+            // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
+            // If that is the case, we don't want to concatenate that number, we want to replace it completely
+            num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
+            changeDisplay(num1);
+        }
     } 
-    else {
+    else if (num2.length < 8) {
         num2 += event.target.textContent;
         changeDisplay(num2);
     }
@@ -141,11 +145,13 @@ const negativeButton = document.querySelector(".negative");
 negativeButton.addEventListener("click", () => {
     // Prevents "0" from being appended to start of number string
     if (num1 !== "" && operator === "") {
-        num1 = (Number(num1) * -1).toString();
+        let negative = Number(num1) * -1;
+        // If the number is too long to properly display, display it in exponential notation
+        num1 = (negative.toString().length > 9) ? negative.toExponential(3).toString() : negative.toString();
         changeDisplay(num1);
     }
     else if (num2 !== "") {
         num2 = (Number(num2) * -1).toString();
         changeDisplay(num2);
     }
-})
+});
