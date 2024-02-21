@@ -106,32 +106,46 @@ operatorButtons.forEach(button => button.addEventListener("click", (event) => {
 }));
 
 const equalsButton = document.querySelector(".equals");
-equalsButton.addEventListener("click", (event) => {
+equalsButton.addEventListener("click", () => {
     // Only carry out the operation if all required values have been entered
     if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
 });
 
 const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", (event) => {
+clearButton.addEventListener("click", () => {
     num1 = num2 = operator = "";
     changeDisplay(0);
 });
 
 const delButton = document.querySelector(".delete");
-delButton.addEventListener("click", (event) => {
+delButton.addEventListener("click", () => {
     // If the displayed number is a result, do nothing
     if (typeof num1 === "number") {
         return;
     }
     // In this case, we are dealing with the first number (even if we have selected an operator)
     else if (num2 === "") {
-        num1 = num1.substring(0, num1.length - 1);
+        // If the number contains a negative symbol and is only two characters long, delete both the negative symbol and the remaining digit
+        num1 = (num1.length === 2 && num1.includes("-")) ? "" : num1.substring(0, num1.length - 1);
         changeDisplay(num1);
         // Get rid of operator selection if the delete button has been pressed immediately after clicking an operator
         operator = "";
     }
     else {
-        num2 = num2.substring(0, num2.length - 1);
+        num2 = (num2.length === 2 && num2.includes("-")) ? "" : num2.substring(0, num2.length - 1);
         changeDisplay(num2);
     }
 });
+
+const negativeButton = document.querySelector(".negative");
+negativeButton.addEventListener("click", () => {
+    // Prevents "0" from being appended to start of number string
+    if (num1 !== "" && operator === "") {
+        num1 = (Number(num1) * -1).toString();
+        changeDisplay(num1);
+    }
+    else if (num2 !== "") {
+        num2 = (Number(num2) * -1).toString();
+        changeDisplay(num2);
+    }
+})

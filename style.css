@@ -39,7 +39,7 @@ button {
     padding: 10px;
 }
 
-.clear, .delete, .equals, .operator {
+.clear, .delete, .equals, .negative, .operator {
     background-color: #ff8f66;
 }
 
