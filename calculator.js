@@ -123,10 +123,12 @@ delButton.addEventListener("click", (event) => {
     if (typeof num1 === "number") {
         return;
     }
-    // In this case, we are dealing with the first number
-    else if (operator === "") {
+    // In this case, we are dealing with the first number (even if we have selected an operator)
+    else if (num2 === "") {
         num1 = num1.substring(0, num1.length - 1);
         changeDisplay(num1);
+        // Get rid of operator selection if the delete button has been pressed immediately after clicking an operator
+        operator = "";
     }
     else {
         num2 = num2.substring(0, num2.length - 1);
