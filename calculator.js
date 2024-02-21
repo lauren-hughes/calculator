@@ -33,7 +33,7 @@ function operate(num1, num2, operator) {
 
 function changeDisplay(number) {
     let display = document.querySelector(".display");
-    display.textContent = number;
+    display.textContent = (number === "") ? "0" : number;
 }
 
 function operationHandler(x, y, currentOperator) {
@@ -94,24 +94,42 @@ decimalButton.addEventListener("click", (event) => {
         }
 });
 
-const operatorButtons = document.querySelectorAll(".operators button");
+const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
-    switch (event.target.textContent) {
-        case "AC":
-            num1 = num2 = operator = "";
-            changeDisplay(0);
-            break;
-        case "=":
-            // Only carry out the operation if all required values have been entered
-            if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
-            break;
-        default:
-            // Don't acknowledge any +, −, × or ÷ clicks unless at least one number has been entered
-            if (num1 !== "") {
-                // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
-                // This does not preserve order of operations aligning with the specification
-                if (num2 !== "") operationHandler(Number(num1), Number(num2), operator);
-                operator = event.target.textContent;
-            }
+    // Don't acknowledge any +, −, × or ÷ clicks unless at least one number has been entered
+    if (num1 !== "") {
+        // If num2 has been entered, then complete the initial operation and then start the next using the result as num1
+        // This does not preserve order of operations aligning with the specification
+        if (num2 !== "") operationHandler(Number(num1), Number(num2), operator);
+        operator = event.target.textContent;
     }
 }));
+
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener("click", (event) => {
+    // Only carry out the operation if all required values have been entered
+    if (num1 !== "" && num2 !== "" && operator !== "") operationHandler(Number(num1), Number(num2), operator);
+});
+
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", (event) => {
+    num1 = num2 = operator = "";
+    changeDisplay(0);
+});
+
+const delButton = document.querySelector(".delete");
+delButton.addEventListener("click", (event) => {
+    // If the displayed number is a result, do nothing
+    if (typeof num1 === "number") {
+        return;
+    }
+    // In this case, we are dealing with the first number
+    else if (operator === "") {
+        num1 = num1.substring(0, num1.length - 1);
+        changeDisplay(num1);
+    }
+    else {
+        num2 = num2.substring(0, num2.length - 1);
+        changeDisplay(num2);
+    }
+});
