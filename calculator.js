@@ -54,25 +54,45 @@ numberButtons.forEach(button => button.addEventListener("click", (event) => {
     if (operator === "") {
         // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
         // If that is the case, we don't want to concatenate that number, we want to replace it completely
-        if (typeof num1 === "number") {
-            num1 = event.target.textContent;
-        } 
-        // If the first number is not being replaced, it already contains a decimal point, and a decimal point has been selected, do nothing
-        else if (event.target.textContent === "." && num1.includes(".")) {
-            return;
-        } 
-        else {
-            num1 += event.target.textContent;
-        }
+        num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
         changeDisplay(num1);
     } 
     else {
-        // If the second number already contains a decimal point and a decimal point has been selected, do nothing
-        if (event.target.textContent === "." && num2.includes(".")) return;
         num2 += event.target.textContent;
         changeDisplay(num2);
     }
 }));
+
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener("click", (event) => {
+        // If no operator has been selected, then all number inputs must be related to the first number
+        if (operator === "") {
+            // If the decimal point is the first selection for the first number, include a preceeding 0 for aesthetic and math purposes
+            if (typeof num1 === "number" || num1 === "") {
+                num1 = "0" + event.target.textContent;
+            } 
+            // If the first number already contains a decimal point do nothing
+            else if (num1.includes(".")) {
+                return;
+            }
+            else {
+                num1 += event.target.textContent;
+            }
+            changeDisplay(num1);
+        } 
+        else {
+            if (num2 === "") {
+                num2 = "0" + event.target.textContent;
+            }
+            else if (num2.includes(".")) {
+                return;
+            } 
+            else {
+                num2 += event.target.textContent;
+            }
+            changeDisplay(num2);
+        }
+});
 
 const operatorButtons = document.querySelectorAll(".operators button");
 operatorButtons.forEach(button => button.addEventListener("click", (event) => {
