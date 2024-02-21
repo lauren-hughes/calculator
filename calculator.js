@@ -55,7 +55,7 @@ numberButtons.forEach(button => button.addEventListener("click", (event) => {
     if (operator === "") {
         // Checking the length prevents the number from overfilling the display div
         // Eight leaves enough room for a decimal point and negation if they choose
-        if (num1.length < 8) {
+        if (num1.toString().length < 8) {
             // If the type of the first number is number, that means the currently displayed number is the result of an operationHandler call
             // If that is the case, we don't want to concatenate that number, we want to replace it completely
             num1 = (typeof num1 === "number") ? event.target.textContent : num1 + event.target.textContent;
