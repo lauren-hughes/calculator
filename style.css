@@ -1,5 +1,5 @@
-/* Orbitron and Roboto Mono fonts from Google */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+/* Orbitron, Roboto Mono and EB Garamond fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
 body {
     margin: 0;
@@ -14,6 +14,24 @@ button {
     margin: 3px;
     padding: 5px;
     width: 90px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.brand {
+    color: white;
+    font-family: "EB Garamond" serif;
+    font-size: 27px;
+}
+
+.branding {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
 }
 
 .buttons {
@@ -35,12 +53,20 @@ button {
     text-align: right;
     font-family: "Orbitron", sans-serif;
     font-size: 60px;
-    margin-bottom: 20px;
+    margin: 30px 0px 30px 0px;
     padding: 10px;
 }
 
 .clear, .delete, .equals, .negative, .operator {
     background-color: #ff8f66;
+}
+
+.model {
+    color: goldenrod;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 700;
 }
 
 .row {
