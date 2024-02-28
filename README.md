@@ -1,1 +1,2 @@
 # calculator
+This project was created as part of [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator). It involved creating a calculator with a user interface. The user can perform simple calculations with both integers and floating-point numbers. Initial operations are calculated before subsequent ones are. For example, if the user clicks "1", "+" and "1", then clicks "×", the display will show "2". If the user then clicks "3" and then "=", the display will show "6". The project serves as a brief demonstration of some CSS and JavaScript skills.
